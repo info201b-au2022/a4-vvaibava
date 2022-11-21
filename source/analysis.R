@@ -212,22 +212,27 @@ plot_jail_pop_black_white()
 
 #This function creates a dataframe that will help better visualize items
 black_jailing_pop <- function() {
-  map_pop <- incarceration_df%>%
+  map_pop <- incarceration_df %>%
     filter(year == 2018) %>%
-    group_by(state)%>%
-    summarise(black_inmates = 100*(sum(black_pop_15to64, na.rm = TRUE)/sum(total_pop_15to64, na.rm = TRUE)))
-  state_size <- map_data("state") %>%
-    rename(State = region) %>%
-    left_join(black_jailing_pop(), by = "State")
-  return(state_size)
+    group_by(state) %>%
+    select(state, black_pop_15to64)%>%
+    summarise(black_pop_15to64 = sum(black_pop_15to64, na.rm = TRUE)) %>%
+    mutate(state = state.name[match(state,state.abb)]) %>% 
+    mutate(state = tolower(state))
+  return(map_pop)
 }
 black_jailing_pop()
+
+state_size <- map_data("state") %>%
+  rename(state = region)%>%
+  left_join(black_jailing_pop(), by = "state")
+View(state_size)
 
 #This function creates a map from the above data frame
 
 plot_black_jailing_pop <- function() {
-  map_plot <- ggplot(black_jailing_pop()) +
-    geom_polygon(mapping = aes(x = long, y = lat, group = group, fill = black_inmates), color = "white", size = 0.1) +
+  map_plot <- ggplot(state_size) +
+    geom_polygon(mapping = aes(x = long, y = lat, group = group, fill = black_pop_15to64), color = "white", size = 0.5) +
     coord_map() +
     labs(
       title = "Black Inmates Jailing Population",
