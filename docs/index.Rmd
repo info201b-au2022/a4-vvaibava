@@ -1,7 +1,7 @@
 ---
-title: "Your A4 Report Title (TODO: Revise title)"
-author: "Your Name"
-date: '2022-11-01'
+title: "Inequalities within the US incarceration"
+author: "Vaibava Venkatesan"
+date: '2022-11-21'
 output: html_document
 ---
 
@@ -11,35 +11,77 @@ source("../source/analysis.R")
 ```
 
 ## Abstract 
-[TODO: Include a short abstract (about 50 words)]
 
-# Test (TODO: Remove before submission!!)
-```{r echo=FALSE}
-q1_string <- test_query1()
-num <- 5
-```
-As you know, this is a markdown report. The [R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) is **useful!**
-
-* Here's a test of a dynamic variable. Say **"`r q1_string`!!!** 
-* Here's another test. A vector
-of numbers: `r test_query2(num)`.
-
-Recall that _{r echo=TRUE}_ can be used to display the code, 
-which is very useful when developing and debugging a report. Here's an example: 
-
-```{r echo=TRUE}
-num <- 5
-sum <- sum(test_query2(num))
-print(sum)
-```
+This data visualization will delve into inequality within the US prison system. The dataset utilized will range from 1970 to 2018, and will be used to analyze patterns of oppressiveness throughout the years. This will help open eyes to what needs to be done in order to mend these inequalities within our justice system. 
 
 ## Introduction 
-[TODO]
+This website focuses on exposing patterns of inequality within the United States. The data used in this visualization is compiled by the *Vera Institute*, a research institution focused on exposing the legal system within America. The data they collect are in support of a better justice system for oppressed groups. In the Incarceration data set, topics such as race of people imprisoned, as well as gender contribute to help users ponder about how we can reform the justice system by ending mass incarceration. 
+
+***Stakeholders***:  
+**Direct**: relatives of those who were imprisoned as a result of mass incarceration and the corrupt justice system
+
+**Indirect**: Advocates for an improved justice system as well as social justice organizations and communities
+
+***Values***: The Central values that will be tackled within this visualization are *equality*, *justice*, and *freedom*. 
+
+This data visualization will mainly emphasize the various patterns of inequality and injustice from 1990 to 2018 within the United States.
+
 
 ## Data Summary 
-[TODO]
+This visualization will utilize 3 main variables to expose the trends of inequalities within the justice system. These three variables help us begin to formulate answers to these questions: 
 
-[TODO ... other sections ... See Canvas for details]
+- *Is there a significant amount of oppression between black and white people within prisons?*
 
-_All the very best with your work!_
+- *Has there been an increase of a certain race over the past 20 years within prisons?*
+
+The first variable investigates the *average* number of black and white people imprisoned during 1990. 
+
+- **39625.99** white people have been imprisoned on average in 1990 
+
+- **6052.998** black people have been imprisoned on average in 1990
+
+ The second variable investigates the *average* number of black and white people imprisoned during 2018. The findings of the report show that:
+ 
+- **41094.82** white people have been imprisoned on average in 2018 
+
+- **9185.912** black people have been imprisoned on average in 2018 
+
+The third variable investigates an overall *comparison* between the average number of blacks and whites imprisoned in both 1990 and 2018. This will help us visualize the change of imprisonment between the two races from 1990 and 2018. The findings show that: 
+
+- **33572.992** white people have been imprisoned more than blacks on average in 1990
+
+- **31908.908** white people have been imprisoned more than blacks on average in 2018. 
+
+## Growth of the US Prison Population
+
+``` {r, echo = FALSE}
+plot_jail_pop_for_us()
+```
+
+**How much of an increase has the incarceration numbers experienced since 1970?** We can notice that there has been a significant jump within incarceration, being that the numbers have gone from *200,000 to 800,000*. However, the jail population did not experience any significant changes until 2008, where it began to slowly drop. 
+
+## Growth of the Prison Population by State
+
+``` {r, echo = FALSE, message = FALSE}
+plot_jail_pop_by_states(c("WA", "CA", "TX", "FL"))
+```
+
+**How have individual states been impacted by the changes of the jail population?** Within the function, I passed Washington, California, Texas, and Florida, since they are popular states that have high populations. Washington did not seem to have a major increase in jail population, however, California, Texas, and Florida all *significantly increased* around the 1990s. 
+
+## Ratio of White to Black inmates 
+
+``` {r, echo = FALSE, warning = FALSE}
+plot_jail_pop_black_white()
+```
+
+**Is the ratio of white to blacks within the jail population greater?**We can see the comparison between both the white and black people within jail as a ratio over time. The overall trend is that there's been a gradual *increase* of more whites to blacks over the years within the jail population. 
+
+## Black Inmates throughout the states in 2018
+
+``` {r, echo = FALSE, message = FALSE}
+plot_black_jailing_pop()
+```
+
+**What is the Population of Black inmates throughout the states?** As seen within the map, the majority of the individuals within *western regions* of the US have a lower population of black individuals. However, if we move further east, the population gradually increases. Although there is a large increase in the number of blacks within the jail population, the population of the US itself consists of mainly white people. This proves that there is inequality within the incarceration system. 
+
 
