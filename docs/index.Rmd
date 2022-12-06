@@ -5,7 +5,7 @@ date: '2022-11-21'
 output: html_document
 ---
 
-```{r echo=FALSE, eval=TRUE, message=FALSE}
+```{r eval=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
 source("../source/a4-helpers.R")
 source("../source/analysis.R")
 ```
@@ -62,7 +62,7 @@ plot_jail_pop_for_us()
 
 ## Growth of the Prison Population by State
 
-``` {r, echo = FALSE, message = FALSE}
+``` {r, echo = FALSE, message = FALSE, warning = FALSE}
 plot_jail_pop_by_states(c("WA", "CA", "TX", "FL"))
 ```
 
@@ -70,7 +70,7 @@ plot_jail_pop_by_states(c("WA", "CA", "TX", "FL"))
 
 ## Ratio of White to Black inmates 
 
-``` {r, echo = FALSE, warning = FALSE}
+``` {r, echo = FALSE, message = FALSE, warning = FALSE}
 plot_jail_pop_black_white()
 ```
 
@@ -78,7 +78,7 @@ plot_jail_pop_black_white()
 
 ## Black Inmates throughout the states in 2018
 
-``` {r, echo = FALSE, message = FALSE}
+``` {r, echo = FALSE}
 plot_black_jailing_pop()
 ```
 

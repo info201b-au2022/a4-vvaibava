@@ -183,8 +183,10 @@ plot_jail_pop_by_states(c("WA", "CA", "TX", "FL"))
 #This function creates a dataframe that will help better visualize items
 jail_pop_black_white <- function(){
   compare_bw <- incarceration_df %>%
-    filter(year >= 1990)%>%
-    select(year, black_pop_15to64, white_pop_15to64)
+    group_by(year)%>%
+    filter(year >= 1800)%>%
+    select(year, black_jail_pop, white_jail_pop)%>%
+    summarise(avg_black = mean(black_jail_pop, na.rm = TRUE), avg_white = mean(white_jail_pop, na.rm = TRUE))
   return(compare_bw)
 }
 jail_pop_black_white()
@@ -193,10 +195,14 @@ jail_pop_black_white()
 
 plot_jail_pop_black_white <- function(){
   jail_pop_bw <- ggplot(jail_pop_black_white()) +
-    geom_point(mapping = aes(x = black_pop_15to64, y = white_pop_15to64, group = year)) +
+    geom_line(mapping = aes(x = year, y = avg_black, color = "black")) +
+    geom_line(mapping = aes(x = year, y = avg_white, color = "white")) +
+    scale_x_continuous(limits = c(1985,2020), breaks = seq(1985,2020, 10)) +
     labs(
       title = "Jail population of Blacks and Whites",
-      caption = "Comparison of the black and white people within Jail from 1990 to 2018"
+      caption = "Comparison of the black and white people within Jail from 1985 to 2018",
+      x = "year",
+      y = "jailing population"
     )
   return(jail_pop_bw)
 }
